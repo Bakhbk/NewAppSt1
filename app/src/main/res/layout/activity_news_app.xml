@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
-        android:dividerHeight="0dp"/>
+        android:dividerHeight="@dimen/divider_height_0_dp"/>
 
     <!-- Empty view is only visible when the list has no items. -->
     <TextView
@@ -28,6 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp" />
+        android:layout_marginTop="@dimen/margin_top_progress_bar" />
 
 </RelativeLayout>

@@ -2,6 +2,8 @@ package com.example.bakhbk.newapp_st1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -28,7 +30,8 @@ public class NewsAppActivity extends AppCompatActivity implements LoaderCallback
     /**
      * URL for news data from the guardianapis.com dataset
      */
-    private static final String NEWS_GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?q=2018%20AND%20world%20cup&tag=sport/sport&orderBy=newest&api-key=test";
+    private static final String NEWS_GUARDIAN_REQUEST_URL =
+            "http://content.guardianapis.com/search?order-by=newest&show-tags=contributor&page-size=15&q=politics&api-key=test";
 
     // Constant value for the news loader ID. We can choose any integer.
     // This really only comes into play if you're using multiple loaders.
@@ -74,8 +77,16 @@ public class NewsAppActivity extends AppCompatActivity implements LoaderCallback
                 // Create a new intent to view the news URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
 
-                // Send the intent to launch a new activity
-                startActivity(websiteIntent);
+                // Verify it resolves
+                PackageManager packageManager = getPackageManager();
+                List<ResolveInfo> activities = packageManager.queryIntentActivities(websiteIntent, 0);
+                boolean isIntentSafe = activities.size() > 0;
+
+                // Start an activity if it's safe
+                if (isIntentSafe) {
+                    // Send the intent to launch a new activity
+                    startActivity(websiteIntent);
+                }
             }
         });
 

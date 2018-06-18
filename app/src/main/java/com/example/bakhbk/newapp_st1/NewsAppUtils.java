@@ -168,9 +168,23 @@ final class NewsAppUtils {
                 // Extract the value for the key called "webUrl"
                 String webUrl = currentNews.getString("webUrl");
 
+                // Extract the JSONObject associated with the
+                // key called "tags", which represents a list of all results
+                // for that tags.
+                JSONArray tags = currentNews.getJSONArray("tags");
+
+                // Extract the value for the key called "webTitle"
+                String articleAuthor;
+                if (tags.length() != 0) {
+                    JSONObject tagsObject = tags.getJSONObject(0);
+                    articleAuthor = tagsObject.getString("webTitle");
+                    articleAuthor = "author " + articleAuthor;
+                } // If the article without any author
+                else articleAuthor = "No author, this is just a news";
+
                 // Create a new {@link News} object with the sectionName, webTitle, webPublicationDate,
                 // and webUrl from the JSON response.
-                News newsApp = new News(sectionName, webTitle, webPublicationDate, webUrl);
+                News newsApp = new News(sectionName, webTitle, webPublicationDate, articleAuthor, webUrl);
 
                 // Add the new {@link News} to the list of newsApp.
                 news.add(newsApp);

@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="0dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp">
+    android:paddingBottom="@dimen/padding_0_dp"
+    android:paddingLeft="@dimen/padding_16_dp"
+    android:paddingRight="@dimen/padding_16_dp"
+    android:paddingTop="@dimen/padding_16_dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,8 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            tools:text="Football"
-            tools:targetApi="jelly_bean" />
+            tools:targetApi="jelly_bean"
+            tools:text="Football" />
 
         <TextView
             android:id="@+id/date"
@@ -30,7 +30,7 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="end"
             android:fontFamily="sans-serif-medium"
-            tools:text="June 6, 2018"  />
+            tools:text="June 6, 2018" />
 
     </RelativeLayout>
 
@@ -40,9 +40,14 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:textColor="@android:color/black"
-        android:textSize="16sp"
-        tools:text="World Cup 2018: Sweden v South Korea – live!"
-        tools:targetApi="jelly_bean" />
+        android:textSize="@dimen/text_size_web_title"
+        tools:text="World Cup 2018: Sweden v South Korea – live!" />
 
-
+    <TextView
+        android:id="@+id/article_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:fontFamily="sans-serif-medium"
+        tools:text="author Will Smith" />
 </LinearLayout>

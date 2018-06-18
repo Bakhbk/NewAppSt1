@@ -9,6 +9,10 @@ class News {
 
     // Date of the news
     private final String mDate;
+
+    // Date of the news
+    private final String mArticleAuthor;
+
     // Website URL of the news
     private final String mUrl;
 
@@ -20,10 +24,11 @@ class News {
      * @param date        is the time in date when the news happened
      * @param url         is the website URL to find more details about the news
      */
-    public News(String sectionName, String webTitle, String date, String url) {
+    public News(String sectionName, String webTitle, String date, String articleAuthor, String url) {
         mSectionName = sectionName;
         mWebTitle = webTitle;
         mDate = date;
+        mArticleAuthor = articleAuthor;
         mUrl = url;
     }
 
@@ -40,6 +45,11 @@ class News {
     // Returns the date when the news happened
     public String getDate() {
         return mDate;
+    }
+
+    /// Returns the web title of the news
+    public String getArticleAuthor() {
+        return mArticleAuthor;
     }
 
     // Returns the website URL to find more information about the earthquake.
