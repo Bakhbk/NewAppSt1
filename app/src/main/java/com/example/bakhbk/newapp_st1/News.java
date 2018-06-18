@@ -4,6 +4,7 @@ class News {
 
     // Section name of the news
     private final String mSectionName;
+
     // Web title of the news
     private final String mWebTitle;
 
