@@ -1,4 +1,4 @@
-package com.example.bakhbk.newapp_st1;
+package com.example.bakhbk.newsapp;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;

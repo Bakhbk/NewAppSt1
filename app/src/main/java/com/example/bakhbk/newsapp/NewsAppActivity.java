@@ -1,4 +1,4 @@
-package com.example.bakhbk.newapp_st1;
+package com.example.bakhbk.newsapp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
