@@ -2,14 +2,17 @@ package com.example.bakhbk.newsapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -22,16 +25,12 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
 import android.widget.TextView;
 
-public class NewsAppActivity extends AppCompatActivity implements LoaderCallbacks<List<News>> {
-
-    private static final String LOG_TAG = NewsAppActivity.class.getName();
-
+public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<List<News>> {
     /**
      * URL for news data from the guardianapis.com dataset
      */
     private static final String NEWS_GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search?order-by=newest&show-tags=contributor&page-size=15&q=politics&api-key=test";
-
+            "https://content.guardianapis.com/search?";
     // Constant value for the news loader ID. We can choose any integer.
     // This really only comes into play if you're using multiple loaders.
     private static final int NEWS_APP_LOADER_ID = 1;
@@ -44,8 +43,6 @@ public class NewsAppActivity extends AppCompatActivity implements LoaderCallback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(LOG_TAG, "Test: News Activity onCreate() called");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_app);
 
@@ -116,12 +113,34 @@ public class NewsAppActivity extends AppCompatActivity implements LoaderCallback
         }
     }
 
+
+    // Create a new NEWS_GUARDIAN_REQUEST_URL
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-        // Create a new loader for the given URL
-        return new NewsLoader(this, NEWS_GUARDIAN_REQUEST_URL);
-    }
 
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String searchKey = sharedPrefs.getString(
+                getString(R.string.settings_search_key),
+                getString(R.string.settings_search_default));
+
+        String categoryOrderBy = sharedPrefs.getString(
+                getString(R.string.settings_category_by_key),
+                getString(R.string.settings_category_by_default)
+        );
+
+        Uri baseUri = Uri.parse(NEWS_GUARDIAN_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("api-key", "dcef95bf-20aa-46fa-9623-6e00e9a1d78e");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("q", searchKey);
+
+        if (!categoryOrderBy.equals(getString(R.string.settings_category_by_default))) {
+            uriBuilder.appendQueryParameter("section", categoryOrderBy);
+        }
+
+        return new NewsLoader(this, uriBuilder.toString());
+    }
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> news) {
         // Hide loading indicator because the data has been loaded
@@ -145,5 +164,25 @@ public class NewsAppActivity extends AppCompatActivity implements LoaderCallback
     public void onLoaderReset(Loader<List<News>> loader) {
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
+    }
+
+    @Override
+    // This method initialize the contents of the Activity's options menu.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the Options Menu we specified in XML
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    // This method is called whenever an item in the options menu is selected.
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

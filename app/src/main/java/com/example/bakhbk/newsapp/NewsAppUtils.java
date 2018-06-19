@@ -24,6 +24,11 @@ final class NewsAppUtils {
     //Tag for the log messages
     private static final String LOG_TAG = NewsAppUtils.class.getSimpleName();
 
+    //Declare int SET_READ_TIMEOUT for setReadTimeout
+    public static final int SET_READ_TIMEOUT = 10000;/* milliseconds */
+    //Declare int SET_CONNECT_TIMEOUT for setConnectTimeout
+    public static final int SET_CONNECT_TIMEOUT = 15000;/* milliseconds */
+
     // Create a private constructor because no one should ever create a {@link NewsAppUtils} object.
     // This class is only meant to hold static variables and methods, which can be accessed
     // directly from the class name NewsAppUtils (and an object instance of NewsAppUtils is not needed).
@@ -73,8 +78,8 @@ final class NewsAppUtils {
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setReadTimeout(SET_READ_TIMEOUT /* milliseconds */);
+            urlConnection.setConnectTimeout(SET_CONNECT_TIMEOUT /* milliseconds */);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
@@ -194,7 +199,7 @@ final class NewsAppUtils {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("NewsAppUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("NewsAppUtils", "Problem parsing the news JSON results", e);
         }
 
         // Return the list of news

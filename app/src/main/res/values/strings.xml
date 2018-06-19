@@ -4,4 +4,48 @@
         Perhaps, no internet connection.
         You can always come later and check for all new stories. ;)</string>
     <string name="no_internet_connection">No internet connection</string>
+
+    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
+    <string name="settings_menu_item">Settings</string>
+    <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
+    <string name="settings_title">News Settings</string>
+
+    <!-- Strings For Searching Preference [CHAR LIMIT=20] -->
+    <string name="settings_search_label">Search by using keyword (max: 20 symbols)</string>
+    <string name="settings_search_key" translatable="false">search</string>
+    <string name="settings_search_default" translatable="false">today</string>
+
+    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
+    <string name="settings_category_by_label">Categories</string>
+    <string name="settings_category_by_key" translatable="false">section</string>
+    <string name="settings_category_by_default" translatable="false">@string/setting_category_by_all_news_label</string>
+
+    <!--Settings category by All News-->
+    <string name="setting_category_by_all_news_label">All News</string>
+    <string name="setting_category_by_all_news_value">api-key</string>
+
+    <!--Settings category by News-->
+    <string name="settings_category_by_news_label">News</string>
+    <string name="settings_category_by_news_value" translatable="false">news</string>
+
+    <!--Settings category by Sport-->
+    <string name="settings_category_by_sport_label">Sport</string>
+    <string name="settings_category_by_sport_value" translatable="false">sport</string>
+
+    <!--Settings category by Media-->
+    <string name="settings_category_by_media_label">Media</string>
+    <string name="settings_category_by_media_value" translatable="false">media</string>
+
+    <!--Settings category by Culture-->
+    <string name="settings_category_by_culture_label">Culture</string>
+    <string name="settings_category_by_culture_value" translatable="false">culture</string>
+
+    <!--Settings category by Politics-->
+    <string name="settings_category_by_politics_label">Politics</string>
+    <string name="settings_category_by_politics_value" translatable="false">politics</string>
+
+    <!--Settings category by Business-->
+    <string name="settings_category_by_business_label">Business</string>
+    <string name="settings_category_by_business_value" translatable="false">business</string>
+
 </resources>
